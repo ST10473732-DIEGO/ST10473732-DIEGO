@@ -1,1 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="120" viewBox="0 0 1080 120" role="img" aria-label="GitHub statistics: first update pending"><rect width="1080" height="120" rx="16" fill="#0d1117"/><g font-family="monospace"><text x="26" y="42" fill="#e9b44c" font-size="18">GitHub statistics</text><text x="26" y="78" fill="#8b949e" font-size="14">Preparing the first automatic update...</text></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="208" viewBox="0 0 1080 208" role="img" aria-labelledby="title desc">
+<title id="title">Diego’s live GitHub statistics</title><desc id="desc">Real GitHub activity. Contribution, commit and pull request counts cover the last year. Repository and star counts cover owned public repositories excluding forks.</desc>
+<rect x=".5" y=".5" width="1079" height="207" rx="16" fill="#0d1117" stroke="#30363d"/>
+<g font-family="DejaVu Sans Mono,Consolas,monospace">
+<text x="26" y="34" font-size="14" fill="#e9b44c" >GITHUB / LIVE STATS</text>
+<text x="26" y="92" font-size="30" fill="#b6d8ef" >439</text>
+<text x="26" y="122" font-size="12" fill="#8b949e" >CONTRIBUTIONS</text>
+<text x="202" y="92" font-size="30" fill="#b6d8ef" >201</text>
+<text x="202" y="122" font-size="12" fill="#8b949e" >COMMITS</text>
+<text x="378" y="92" font-size="30" fill="#b6d8ef" >1</text>
+<text x="378" y="122" font-size="12" fill="#8b949e" >PULL REQUESTS</text>
+<text x="554" y="92" font-size="30" fill="#b6d8ef" >3</text>
+<text x="554" y="122" font-size="12" fill="#8b949e" >PUBLIC REPOS</text>
+<text x="730" y="92" font-size="30" fill="#b6d8ef" >0</text>
+<text x="730" y="122" font-size="12" fill="#8b949e" >STARS</text>
+<text x="906" y="92" font-size="30" fill="#b6d8ef" >0</text>
+<text x="906" y="122" font-size="12" fill="#8b949e" >FOLLOWERS</text>
+<text x="26" y="160" font-size="12" fill="#8b949e" >Activity: last year  /  Repos &amp; stars: owned public, excluding forks</text>
+<text x="26" y="185" font-size="12" fill="#8b949e" >Refreshes hourly from GitHub</text>
+</g></svg>
