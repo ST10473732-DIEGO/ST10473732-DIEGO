@@ -1,6 +1,6 @@
 <!-- Portrait and buttons are SVG assets; the HTML links make the buttons clickable. -->
 <p align="center">
-  <img src="assets/diego-profile.svg" alt="Diego De Oliveira — ASCII developer profile" width="100%" />
+  <img src="assets/diego-profile.svg?v=2" alt="Diego De Oliveira — ASCII developer profile" width="100%" />
 </p>
 
 <p align="center">
