@@ -1,0 +1,51 @@
+name: Update GitHub profile
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/**'
+      - '.github/workflows/update-profile.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-github-profile
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out profile
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Validate generator
+        run: python3 -m unittest discover -s tools -p 'test_*.py'
+
+      - name: Generate live statistics and contribution animation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROFILE_USERNAME: ST10473732-DIEGO
+        run: python3 tools/update_profile.py
+
+      - name: Save changed artwork
+        run: |
+          git add assets/github-stats.svg assets/contributions.svg
+          if git diff --cached --quiet; then
+            echo "Profile data has not changed."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore: refresh GitHub profile statistics'
+          git pull --rebase origin main
+          git push origin HEAD:main
