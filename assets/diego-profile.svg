@@ -3761,17 +3761,19 @@
     <text x="503" y="262" fill="#e9b44c" font-size="14">Studying.</text>
     <text x="623" y="262" fill="#b6d8ef" font-size="14">Computer Science</text>
     <text x="503" y="289" fill="#e9b44c" font-size="14">Languages.</text>
-    <text x="623" y="289" fill="#b6d8ef" font-size="14">Java, C#, C, Python</text>
-    <text x="503" y="338" fill="#e9b44c" font-size="14">OS.</text>
-    <text x="623" y="338" fill="#b6d8ef" font-size="14">Windows 11 / CachyOS</text>
-    <text x="503" y="375" fill="#e9b44c" font-size="14">Projects</text>
-    <text x="503" y="403" fill="#c9d1d9" font-size="14">OLIVE / OLIVE OS / OLIVE LANG</text>
-    <text x="503" y="430" fill="#c9d1d9" font-size="13">OLIVE POCKET / OLIVE CANOPY / PIPS</text>
-    <path d="M503 455H1030" stroke="#30363d" />
-    <text x="503" y="486" fill="#e9b44c" font-size="14">Focus</text>
-    <text x="623" y="486" fill="#b6d8ef" font-size="14">Software, AI &amp; systems</text>
-    <text x="503" y="524" fill="#e9b44c" font-size="14">&gt;</text>
-    <text x="524" y="524" fill="#8b949e" font-size="14">building what comes next_</text>
-    <text x="623" y="311" fill="#b6d8ef" font-size="14">TypeScript, Ruby</text>
+    <text x="503" y="382" fill="#e9b44c" font-size="14">OS.</text>
+    <text x="623" y="382" fill="#b6d8ef" font-size="14">Windows 11 / CachyOS</text>
+    <text x="503" y="414" fill="#e9b44c" font-size="14">Projects</text>
+    <text x="503" y="439" fill="#c9d1d9" font-size="14">OLIVE / OLIVE OS / OLIVE LANG</text>
+    <text x="503" y="461" fill="#c9d1d9" font-size="13">OLIVE POCKET / OLIVE CANOPY / PIPS</text>
+    <path d="M503 480H1030" stroke="#30363d" />
+    <text x="503" y="505" fill="#e9b44c" font-size="14">Focus</text>
+    <text x="623" y="505" fill="#b6d8ef" font-size="14">Software, AI &amp; systems</text>
+    <text x="503" y="540" fill="#e9b44c" font-size="14">&gt;</text>
+    <text x="524" y="540" fill="#8b949e" font-size="14">building what comes next_</text>
+    <text x="623" y="289" fill="#b6d8ef" font-size="14">Java, C#, C, C++, Python</text>
+    <text x="623" y="310" fill="#b6d8ef" font-size="14">TypeScript, JavaScript, Ruby</text>
+    <text x="623" y="331" fill="#b6d8ef" font-size="14">Rust, Delphi, Shell, QML</text>
+    <text x="623" y="352" fill="#b6d8ef" font-size="14">HTML, CSS, Swift</text>
   </g>
 </svg>
