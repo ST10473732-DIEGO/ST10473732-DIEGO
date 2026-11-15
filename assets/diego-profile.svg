@@ -3764,8 +3764,8 @@
     <text x="503" y="382" fill="#e9b44c" font-size="14">OS.</text>
     <text x="623" y="382" fill="#b6d8ef" font-size="14">Windows 11 / CachyOS</text>
     <text x="503" y="414" fill="#e9b44c" font-size="14">Projects</text>
-    <text x="503" y="439" fill="#c9d1d9" font-size="14">OLIVE / OLIVE OS / OLIVE LANG</text>
-    <text x="503" y="461" fill="#c9d1d9" font-size="13">OLIVE POCKET / OLIVE CANOPY / PIPS / Drogue</text>
+    <text x="503" y="439" fill="#c9d1d9" font-size="14">OLIVE / OLIVE OS / OLIVE LANG / Drogue</text>
+    <text x="503" y="461" fill="#c9d1d9" font-size="13">OLIVE POCKET / OLIVE CANOPY / PIPS</text>
     <path d="M503 480H1030" stroke="#30363d" />
     <text x="503" y="505" fill="#e9b44c" font-size="14">Focus</text>
     <text x="623" y="505" fill="#b6d8ef" font-size="14">Software, AI &amp; systems</text>
