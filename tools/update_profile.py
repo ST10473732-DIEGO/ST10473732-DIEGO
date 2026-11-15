@@ -90,6 +90,8 @@ def validate_profile(data):
         if not isinstance(data[name], int) or data[name] < 0:
             raise ValueError(f'Invalid {name}')
     calendar = data['calendar']
+    if type(calendar['totalContributions']) is not int or calendar['totalContributions'] < 0:
+        raise ValueError('Invalid calendar total')
     weeks = calendar['weeks']
     if not 1 <= len(weeks) <= 54:
         raise ValueError('Unexpected calendar length')
@@ -106,8 +108,15 @@ def validate_profile(data):
         if day['contributionLevel'] not in LEVELS or not isinstance(day['contributionCount'], int) or day['contributionCount'] < 0:
             raise ValueError('Invalid contribution day')
         previous = date
-    if sum(day['contributionCount'] for day in days) != calendar['totalContributions']:
-        raise ValueError('Calendar total does not match daily counts')
+    # The API's summary and daily values can disagree. Keep both as returned
+    # instead of aborting, inventing contributions or silently changing a total.
+    daily_total = sum(day['contributionCount'] for day in days)
+    reported_total = calendar['totalContributions']
+    if daily_total != reported_total:
+        print(f'::warning::Contribution summary differs from daily counts: '
+              f'GitHub total={reported_total}, daily sum={daily_total}, '
+              f'range={days[0]["date"]} to {days[-1]["date"]}. '
+              'Preserving the GitHub summary and all daily counts unchanged.')
 
 def text(x, y, value, size=14, colour='#c9d1d9', extra=''):
     return f'<text x="{x}" y="{y}" font-size="{size}" fill="{colour}" {extra}>{html.escape(str(value))}</text>'
@@ -133,10 +142,16 @@ def stats_svg(data):
 
 def calendar_svg(data):
     cal = data['calendar']
+    daily_total = sum(day['contributionCount'] for week in cal['weeks']
+                      for day in week['contributionDays'])
+    calendar_note = 'ST10473732-DIEGO  /  contribution arcade'
+    if daily_total != cal['totalContributions']:
+        calendar_note = (f'Daily squares: {daily_total:,} contributions / '
+                         f'GitHub-reported total: {cal["totalContributions"]:,}')
     weeks = cal['weeks']
     s = svg_start(294, 'Diego’s animated contribution calendar', f"{cal['totalContributions']:,} contributions in the last year. Pac-Man travels through the real contribution calendar. Colours show contribution levels; the animation repeats.")
     s += [text(26, 35, f"{cal['totalContributions']:,} contributions in the last year", 17, '#c9d1d9'),
-          text(26, 59, 'ST10473732-DIEGO  /  contribution arcade', 12, '#8b949e')]
+          text(26, 59, calendar_note, 12, '#8b949e')]
     left, top, pitch, cell = 63, 105, 18, 13
     points = []
     cells = []
@@ -221,3 +236,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

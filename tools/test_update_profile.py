@@ -1,4 +1,6 @@
 import copy
+import contextlib
+import io
 import datetime as dt
 import tempfile
 import unittest
@@ -49,7 +51,7 @@ class ProfileTests(unittest.TestCase):
             path=Path(tmp)
             profile.write_assets(fixture(),path)
             before={p.name:p.read_bytes() for p in path.iterdir()}
-            bad=fixture();bad['calendar']['totalContributions']+=1
+            bad=fixture();bad['calendar']['totalContributions']=-1
             with self.assertRaises(ValueError):profile.write_assets(bad,path)
             self.assertEqual(before,{p.name:p.read_bytes() for p in path.iterdir()})
 
@@ -75,4 +77,46 @@ class ProfileTests(unittest.TestCase):
         data=fixture();days=data['calendar']['weeks'][0]['contributionDays'];days[1]=copy.deepcopy(days[0])
         with self.assertRaises(ValueError):profile.validate_profile(data)
 
+
+    def test_mismatched_totals_render_without_rewriting_api_data(self):
+        for reported in (0, 604, 606, 10000):
+            with self.subTest(reported=reported), tempfile.TemporaryDirectory() as tmp:
+                data=fixture()
+                daily_total=data['calendar']['totalContributions']
+                data['calendar']['totalContributions']=reported
+                original=copy.deepcopy(data)
+                log=io.StringIO()
+                with contextlib.redirect_stdout(log):
+                    profile.write_assets(data,Path(tmp))
+                self.assertEqual(data,original)
+                self.assertIn(f'GitHub total={reported}',log.getvalue())
+                self.assertIn(f'daily sum={daily_total}',log.getvalue())
+                graph=(Path(tmp)/'contributions.svg').read_text()
+                stats=(Path(tmp)/'github-stats.svg').read_text()
+                profile.validate_svg(graph)
+                profile.validate_svg(stats)
+                self.assertIn(f'{reported:,} contributions in the last year',graph)
+                self.assertIn(f'Daily squares: {daily_total:,}',graph)
+                self.assertIn(f'>{reported:,}</text>',stats)
+                self.assertEqual(graph.count(' contributions</title>'),365)
+
+    def test_matching_totals_do_not_warn(self):
+        log=io.StringIO()
+        with contextlib.redirect_stdout(log):
+            profile.validate_profile(fixture())
+        self.assertNotIn('::warning::',log.getvalue())
+        self.assertNotIn('Daily squares:',profile.calendar_svg(fixture()))
+
+    def test_malformed_totals_and_days_still_rejected(self):
+        for total in (-1, None, '605', 605.0, True):
+            with self.subTest(total=total):
+                data=fixture();data['calendar']['totalContributions']=total
+                with self.assertRaises(ValueError):profile.validate_profile(data)
+        for count in (-1, '3', None):
+            with self.subTest(count=count):
+                data=fixture()
+                data['calendar']['weeks'][0]['contributionDays'][0]['contributionCount']=count
+                with self.assertRaises(ValueError):profile.validate_profile(data)
+
 if __name__=='__main__':unittest.main()
+
